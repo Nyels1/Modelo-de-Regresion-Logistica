@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Salario</title>
+    <style>
+            body {
+            font-family: Arial;
+            background: #f4f7f9;
+            padding: 40px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input {
+            padding: 8px;
+            margin: 10px 0;
+            width: 120px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 8px 15px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Predicción de Salario según Horas Trabajadas</h2>
+        <form method="post" action="{% url 'predecir' %}">
+            {% csrf_token %}
+            <label>Horas trabajadas:</label><br>
+            <input type="number" name="horas" step="any" required><br>
+            <button type="submit">Predecir</button>
+        </form>
+
+        {% if prediccion %}
+            <h3>Salario estimado: ${{ prediccion }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
